@@ -1,4 +1,3 @@
-
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -16,9 +15,9 @@ def rotate_image(image, angle):
 
 cap = cv2.VideoCapture('D:/Computer_Vision/face_recognition/video/face_video.mp4')
 
-image_right_eye = cv2.imread('D:/Computer_Vision/face_recognition//image/left_eye_2.png', cv2.IMREAD_UNCHANGED)
-image_left_eye = cv2.imread('D:/Computer_Vision/face_recognition//image/right_eye_2.png', cv2.IMREAD_UNCHANGED)
-image_nose = cv2.imread('D:/Computer_Vision/face_recognition//image/nose_2.png', cv2.IMREAD_UNCHANGED)
+image_right_eye = cv2.imread('image/left_eye_2.png', cv2.IMREAD_UNCHANGED)
+image_left_eye = cv2.imread('image/right_eye_2.png', cv2.IMREAD_UNCHANGED)
+image_nose = cv2.imread('image/nose_2.png', cv2.IMREAD_UNCHANGED)
 
 
 def overlay(image, x, y, w, h, overlay_image):
@@ -56,9 +55,9 @@ with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence
           left_eye = (int(left_eye.x * w) + 20, int(left_eye.y * h) - 150)
           nose_tip = (int(nose_tip.x * w), int(nose_tip.y * h))
 
-          image[right_eye[1] - 50 : right_eye[1] + 50, right_eye[0] - 50 : right_eye[0] + 50] = int(image_right_eye)
-          image[left_eye[1] - 50 : left_eye[1] + 50, left_eye[0] - 50 : left_eye[0] + 50] = int(image_left_eye)
-          image[nose_tip[1] - 50 : nose_tip[1] + 50, nose_tip[0] - 150 : nose_tip[0] + 150] = int(image_nose)
+          image[right_eye[1] - 50 : right_eye[1] + 50, right_eye[0] - 50 : right_eye[0] + 50] = image_right_eye
+          image[left_eye[1] - 50 : left_eye[1] + 50, left_eye[0] - 50 : left_eye[0] + 50] = image_left_eye
+          image[nose_tip[1] - 50 : nose_tip[1] + 50, nose_tip[0] - 150 : nose_tip[0] + 150] = image_nose
 
           tan_theta = (left_eye[1] - right_eye[1]) / (right_eye[0] - left_eye[0])
           theta = np.arctan(tan_theta)
