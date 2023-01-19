@@ -13,11 +13,11 @@ def rotate_image(image, angle):
     return result
 
 
-cap = cv2.VideoCapture('D:/Computer_Vision/face_recognition/video/face_video.mp4')
+cap = cv2.VideoCapture('video/face_video.mp4')
 
-image_right_eye = cv2.imread('image/left_eye_2.png', cv2.IMREAD_UNCHANGED)
-image_left_eye = cv2.imread('image/right_eye_2.png', cv2.IMREAD_UNCHANGED)
-image_nose = cv2.imread('image/nose_2.png', cv2.IMREAD_UNCHANGED)
+image_right_eye = cv2.imread('image/left_eye.png', cv2.IMREAD_UNCHANGED)
+image_left_eye = cv2.imread('image/right_eye.png', cv2.IMREAD_UNCHANGED)
+image_nose = cv2.imread('image/nose.png', cv2.IMREAD_UNCHANGED)
 
 
 def overlay(image, x, y, w, h, overlay_image):
