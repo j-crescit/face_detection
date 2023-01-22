@@ -12,21 +12,18 @@ def rotate_image(image, angle):
     result = cv2.warpAffine(image, rotate_math, image.shape[1::-1], flags = cv2.INTER_LINEAR, borderValue = (255, 255, 255))
     return result
 
+def overlay(image, x, y, w, h, overlay_image):
+    alpha = overlay_image[:, :, 3]
+    mask_image = alpha / 255
+
+    for c in range(0, 3):
+        image[y - h : y + h, x - w : x + w, c] = (overlay_image[:, :, c] * mask_image) + (image[y - h : y + h, x - w : x + w, c] * (1 - mask_image))
 
 cap = cv2.VideoCapture('video/face_video.mp4')
 
 image_right_eye = cv2.imread('image/left_eye.png', cv2.IMREAD_UNCHANGED)
 image_left_eye = cv2.imread('image/right_eye.png', cv2.IMREAD_UNCHANGED)
 image_nose = cv2.imread('image/nose.png', cv2.IMREAD_UNCHANGED)
-
-
-def overlay(image, x, y, w, h, overlay_image):
-    alpha = overlay_image[:, :, 4]
-    mask_image = alpha / 255
-
-    for c in range(0, 4):
-        image[y - h : y + h, x - w : x + w, c] = (overlay_image[:, :, c] * mask_image) + (image[y - h : y + h, x - w : x + w, c] * (1 - mask_image))
-
 
 with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.7) as face_detection:
 
