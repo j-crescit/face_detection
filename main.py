@@ -1,5 +1,7 @@
 import cv2
 import mediapipe as mp
+import numpy as np
+import math
 
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
@@ -13,6 +15,7 @@ def rotate_image(image, angle):
 cap = cv2.VideoCapture(0)
 
 with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
+
     while cap.isOpened():
         success, image = cap.read()
         if not success:
@@ -26,7 +29,14 @@ with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         if results.detections:
+
             for detection in results.detections:
+
+                keypoints = detection.location_data.relative_keypoints
+                right_eye = keypoints[0]
+                left_eye = keypoints[1]
+                nose_tip = keypoints[2]
+                
                 mp_drawing.draw_detection(image, detection)
 
                 tan_theta = (left_eye[1] - right_eye[1]) / (right_eye[0] - left_eye[0])
