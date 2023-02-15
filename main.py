@@ -36,6 +36,11 @@ with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence
                 right_eye = keypoints[0]
                 left_eye = keypoints[1]
                 nose_tip = keypoints[2]
+
+                h, w, _ = image.shape
+                right_eye = (int(right_eye.x * w) - 100, int(right_eye.y * h) - 150)
+                left_eye = (int(left_eye.x * w) + 20, int(left_eye.y * h) - 150)
+                nose_tip = (int(nose_tip.x * w), int(nose_tip.y * h))
                 
                 mp_drawing.draw_detection(image, detection)
 
