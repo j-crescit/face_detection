@@ -21,6 +21,10 @@ def overlay(image, x, y, w, h, overlay_image):
 
 cap = cv2.VideoCapture(0)
 
+image_right_eye = cv2.imread('image/left_eye.png', cv2.IMREAD_UNCHANGED)
+image_left_eye = cv2.imread('image/right_eye.png', cv2.IMREAD_UNCHANGED)
+image_nose = cv2.imread('image/nose.png', cv2.IMREAD_UNCHANGED)
+
 with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.5) as face_detection:
 
     while cap.isOpened():
